@@ -44,14 +44,24 @@ const server = http.createServer((req, res) => {
     let chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
 
     // Construct data object to send to handler
-    let data {
+    let data = {
       'trimmedPath' : trimmedPath,
       'queryStringObject' : queryStringObject,
       'method' : method,
       'headers' : headers,
       'buffer' : buffer
     };
-    
+
+    // Route the request to the handler specified in router
+    chosenHandler(data, (statusCode, payload) => {
+      // Use status code called back by handler, or default 404
+      statusCode = typoeof(statusCode) == 'number' ? statusCode: 200;
+
+      // Use the payload called back by the handler, or default
+      payload = typeof(payload) == 'object' ? payload : {};
+
+    });
+
     // Send response. Called at end of every request
     res.end('Hello World\n')
 
