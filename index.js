@@ -43,6 +43,15 @@ const server = http.createServer((req, res) => {
     // Choose handler that this request should go to. 404 default handler, if not found
     let chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
 
+    // Construct data object to send to handler
+    let data {
+      'trimmedPath' : trimmedPath,
+      'queryStringObject' : queryStringObject,
+      'method' : method,
+      'headers' : headers,
+      'buffer' : buffer
+    };
+    
     // Send response. Called at end of every request
     res.end('Hello World\n')
 
