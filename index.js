@@ -54,3 +54,22 @@ PORT = process.env.PORT || 3000
 server.listen(3000, () => {
   console.log(`Server listening on ${PORT}`)
 });
+
+// Define handlers
+let handlers = {};
+
+// Sample handler
+handlers.sample = function(data, callback) {
+
+};
+
+// Not found handler 404
+handlers.notFound = function(data, callback) {
+
+};
+
+// Define a request router
+let router = {
+  'sample' : handlers.sample
+
+};
