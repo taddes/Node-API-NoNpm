@@ -40,7 +40,10 @@ const server = http.createServer((req, res) => {
   req.on('end', function() {
     buffer += decoder.end();
 
-    // Send response
+    // Choose handler that this request should go to. 404 default handler, if not found
+    let chosenHandler = typeof(router[trimmedPath]) !== 'undefined' ? router[trimmedPath] : handlers.notFound;
+
+    // Send response. Called at end of every request
     res.end('Hello World\n')
 
     // Log path the user requested
@@ -59,17 +62,19 @@ server.listen(3000, () => {
 let handlers = {};
 
 // Sample handler
-handlers.sample = function(data, callback) {
+handlers.sample = (data, callback) => {
+  // callback an http status code and payload object
+  callback(406, {'name' : 'sample handler'})
 
 };
 
 // Not found handler 404
-handlers.notFound = function(data, callback) {
+handlers.notFound = (data, callback) => {
+  callback(404);
 
 };
 
 // Define a request router
 let router = {
   'sample' : handlers.sample
-
 };
