@@ -1,7 +1,7 @@
 /* 
-* Primary file for API
-* 
-*/
+ * Primary file for API
+ * 
+ */
 
 // Dependencies
 const http = require('http');
