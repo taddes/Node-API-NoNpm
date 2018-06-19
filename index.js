@@ -64,6 +64,8 @@ const server = http.createServer((req, res) => {
       var payloadString = JSON.stringify(payload);
 
       // Return the response. Write the status code
+      // Tells browser we're sending JSON and it should parse response accordingly
+      res.setHeader('Content-Type', 'application/json')
       res.writeHead(statusCode)
 
       // Writing the payload the handler gave back, JSON stringified
