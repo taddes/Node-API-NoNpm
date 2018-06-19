@@ -60,13 +60,19 @@ const server = http.createServer((req, res) => {
       // Use the payload called back by the handler, or default
       payload = typeof(payload) == 'object' ? payload : {};
 
+      // Convert the payload to a string. Payload the handler is sending back to the user
+      var payloadString = JSON.stringify(payload);
+
+      // Return the response. Write the status code
+      res.writeHead(statusCode)
+
+      // Writing the payload the handler gave back, JSON stringified
+      res.end(payloadString)
+
+      // Log path the user requested
+      console.log('Returning this response: ', statusCode,payloadString);
+
     });
-
-    // Send response. Called at end of every request
-    res.end('Hello World\n')
-
-    // Log path the user requested
-    console.log('Request recieved with the following payload: ', buffer);
 
   });
 });
