@@ -13,7 +13,7 @@ const server = http.createServer((req, res) => {
 
   // Get the URL and parse
   /* request object contains lots of data, second param true to parse query string, 
-  *  set it as if we sent to query string module. Parsed metadata*/
+     set it as if we sent to query string module. Parsed metadata */
   const parsedUrl = url.parse(req.url, true);
 
   // Get path from URL. Untrimmed path that the user requested.
